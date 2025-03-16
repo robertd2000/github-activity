@@ -30,6 +30,6 @@ func FetchActivity(username string) []model.Activity {
 
 func DisplayActivity(activities []model.Activity) {
 	for _, activity := range activities {
-		fmt.Println(activity.Type, activity.Repo.Name, activity.CreatedAt, activity.Payload.Action, activity.Payload.Ref, activity.Payload.RefType, activity.Payload.Commits[0].Message)
+		fmt.Println(activity.Type, activity.Repo.Name, activity.CreatedAt, activity.Payload.Action, activity.Payload.Ref, activity.Payload.RefType)
 	}
 }
