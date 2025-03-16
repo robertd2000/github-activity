@@ -1,9 +1,10 @@
 package main
 
 import (
-	"io"
 	"log"
 	"os"
+
+	"github.com/robertd2000/github-activity/internal/service"
 )
 
 func main() {
@@ -15,13 +16,6 @@ func main() {
 
 	username := args[0]
 
-	
-
-	body, err := io.ReadAll(resp.Body)
-	if err != nil {
-		log.Fatalln(err)
-	}
-
-	sb := string(body)
-	log.Printf(sb)
+	activities := service.FetchActivity(username)
+	service.DisplayActivity(activities)
 }
