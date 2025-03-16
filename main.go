@@ -5,10 +5,19 @@ import (
 	"io"
 	"log"
 	"net/http"
+	"os"
 )
 
 func main() {
-	resp, err := http.Get(fmt.Sprintf("https://api.github.com/users/%s/events", "robertd2000"))
+	args := os.Args[1:]
+
+	if len(args) == 0 {
+		log.Fatalln("Please provide a username")
+	}
+
+	username := args[0]
+	
+	resp, err := http.Get(fmt.Sprintf("https://api.github.com/users/%s/events", username))
 	if err != nil {
 		log.Fatalln(err)
 	}
