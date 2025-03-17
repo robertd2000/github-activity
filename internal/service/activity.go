@@ -33,26 +33,25 @@ func DisplayActivity(activities []model.Activity) {
 	for _, activity := range activities {
 		switch activity.Type {
 		case "PushEvent":
-			fmt.Println("Pushed to", activity.Repo.Name, "at", utils.FormatDate(activity.CreatedAt), "with", len(activity.Payload.Commits), "commits")
+			fmt.Println("- Pushed to", activity.Repo.Name, "at", utils.FormatDate(activity.CreatedAt), "with", len(activity.Payload.Commits), "commits")
 		case "CreateEvent":
-			fmt.Println("Created", activity.Repo.Name, "at", utils.FormatDate(activity.CreatedAt))
+			fmt.Println("- Created", activity.Repo.Name, "at", utils.FormatDate(activity.CreatedAt))
 		case "ForkEvent":
-			fmt.Println("Forked", activity.Repo.Name, "at", utils.FormatDate(activity.CreatedAt))
+			fmt.Println("- Forked", activity.Repo.Name, "at", utils.FormatDate(activity.CreatedAt))
 		case "IssueCommentEvent":
-			fmt.Println("Commented on", activity.Repo.Name, "at", utils.FormatDate(activity.CreatedAt))
+			fmt.Println("- Commented on", activity.Repo.Name, "at", utils.FormatDate(activity.CreatedAt))
 		case "IssuesEvent":
-			fmt.Println("Created an issue on", activity.Repo.Name, "at", utils.FormatDate(activity.CreatedAt))
+			fmt.Println("- Created an issue on", activity.Repo.Name, "at", utils.FormatDate(activity.CreatedAt))
 		case "WatchEvent":
-			fmt.Println("Starred ", activity.Repo.Name, "at", utils.FormatDate(activity.CreatedAt))
+			fmt.Println("- Starred ", activity.Repo.Name, "at", utils.FormatDate(activity.CreatedAt))
 		case "PullRequestEvent":
-			fmt.Println("Created pull request", activity.Repo.Name, "at", utils.FormatDate(activity.CreatedAt))
+			fmt.Println("- Created pull request", activity.Repo.Name, "at", utils.FormatDate(activity.CreatedAt))
 		case "PullRequestReviewEvent":
-			fmt.Println("Reviewed pull request", activity.Repo.Name, "at", utils.FormatDate(activity.CreatedAt))
+			fmt.Println("- Reviewed pull request", activity.Repo.Name, "at", utils.FormatDate(activity.CreatedAt))
 		case "PullRequestReviewCommentEvent":
-			fmt.Println("Commented on pull request", activity.Repo.Name, "at", utils.FormatDate(activity.CreatedAt))
-
+			fmt.Println("- Commented on pull request", activity.Repo.Name, "at", utils.FormatDate(activity.CreatedAt))
+		default:
+			fmt.Println("-", activity.Type, activity.Repo.Name, "at", utils.FormatDate(activity.CreatedAt))
 		}
-		// fmt.Println(activity.Type, activity.Repo.Name, activity.CreatedAt, activity.Payload.Action, activity.Payload.Ref, activity.Payload.RefType, activity.Payload.Commits)
-
 	}
 }
