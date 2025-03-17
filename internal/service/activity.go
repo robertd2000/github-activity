@@ -29,7 +29,7 @@ func FetchActivity(username string) []model.Activity {
 	return activities
 }
 
-func DisplayActivity(activities []model.Activity, filterType string) {
+func DisplayActivity(activities []model.Activity, filterType model.EventType) {
 	if filterType != "" {
 		activities = utils.Filter(activities, func(activity model.Activity) bool {
 			return activity.Type == filterType
