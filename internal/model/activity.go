@@ -3,7 +3,7 @@ package model
 import "time"
 
 type Activity struct {
-	Type      string `json:"type"`
+	Type      EventType  `json:"type"`
 	Repo      Repo   `json:"repo"`
 	CreatedAt time.Time `json:"created_at"`
 	Payload   struct {

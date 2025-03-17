@@ -29,27 +29,34 @@ func FetchActivity(username string) []model.Activity {
 	return activities
 }
 
-func DisplayActivity(activities []model.Activity) {
+func DisplayActivity(activities []model.Activity, filterType model.EventType) {
+	if filterType != "" {
+		activities = utils.Filter(activities, func(activity model.Activity) bool {
+			return activity.Type == filterType
+		})
+	}
 	for _, activity := range activities {
 		switch activity.Type {
-		case "PushEvent":
+		case model.PushEvent:
 			fmt.Println("- Pushed to", activity.Repo.Name, "at", utils.FormatDate(activity.CreatedAt), "with", len(activity.Payload.Commits), "commits")
-		case "CreateEvent":
+		case model.CreateEvent:
 			fmt.Println("- Created", activity.Repo.Name, "at", utils.FormatDate(activity.CreatedAt))
-		case "ForkEvent":
+		case model.ForkEvent:
 			fmt.Println("- Forked", activity.Repo.Name, "at", utils.FormatDate(activity.CreatedAt))
-		case "IssueCommentEvent":
+		case model.IssueCommentEvent:
 			fmt.Println("- Commented on", activity.Repo.Name, "at", utils.FormatDate(activity.CreatedAt))
-		case "IssuesEvent":
+		case model.IssuesEvent:
 			fmt.Println("- Created an issue on", activity.Repo.Name, "at", utils.FormatDate(activity.CreatedAt))
-		case "WatchEvent":
+		case model.WatchEvent:
 			fmt.Println("- Starred ", activity.Repo.Name, "at", utils.FormatDate(activity.CreatedAt))
-		case "PullRequestEvent":
+		case model.PullRequestEvent:
 			fmt.Println("- Created pull request", activity.Repo.Name, "at", utils.FormatDate(activity.CreatedAt))
-		case "PullRequestReviewEvent":
+		case model.PullRequestReviewEvent:
 			fmt.Println("- Reviewed pull request", activity.Repo.Name, "at", utils.FormatDate(activity.CreatedAt))
-		case "PullRequestReviewCommentEvent":
+		case model.PullRequestReviewCommentEvent:
 			fmt.Println("- Commented on pull request", activity.Repo.Name, "at", utils.FormatDate(activity.CreatedAt))
+		case model.DeleteEvent:
+			fmt.Println("- Delete from", activity.Repo.Name, "at", utils.FormatDate(activity.CreatedAt))
 		default:
 			fmt.Println("-", activity.Type, activity.Repo.Name, "at", utils.FormatDate(activity.CreatedAt))
 		}
