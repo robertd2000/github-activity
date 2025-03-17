@@ -7,6 +7,7 @@ import (
 	"net/http"
 
 	"github.com/robertd2000/github-activity/internal/model"
+	"github.com/robertd2000/github-activity/internal/utils"
 )
 
 func FetchActivity(username string) []model.Activity {
@@ -32,11 +33,13 @@ func DisplayActivity(activities []model.Activity) {
 	for _, activity := range activities {
 		switch activity.Type {
 		case "PushEvent":
-			fmt.Println("Pushed to", activity.Repo.Name, "at", activity.CreatedAt, "with", len(activity.Payload.Commits), "commits")
+			fmt.Println("Pushed to", activity.Repo.Name, "at", utils.FormatDate(activity.CreatedAt), "with", len(activity.Payload.Commits), "commits")
 		case "CreateEvent":
-			fmt.Println("Created", activity.Repo.Name)
+			fmt.Println("Created", activity.Repo.Name, "at", utils.FormatDate(activity.CreatedAt))
 		case "ForkEvent":
-			fmt.Println("Forked", activity.Repo.Name)
+			fmt.Println("Forked", activity.Repo.Name, "at", utils.FormatDate(activity.CreatedAt))
+		case "IssueCommentEvent":
+			fmt.Println("Commented on", activity.Repo.Name, "at", utils.FormatDate(activity.CreatedAt))
 		}
 		// fmt.Println(activity.Type, activity.Repo.Name, activity.CreatedAt, activity.Payload.Action, activity.Payload.Ref, activity.Payload.RefType, activity.Payload.Commits)
 

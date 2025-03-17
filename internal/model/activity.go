@@ -1,9 +1,11 @@
 package model
 
+import "time"
+
 type Activity struct {
 	Type      string `json:"type"`
 	Repo      Repo   `json:"repo"`
-	CreatedAt string `json:"created_at"`
+	CreatedAt time.Time `json:"created_at"`
 	Payload   struct {
 		Action  string `json:"action"`
 		Ref     string `json:"ref"`
