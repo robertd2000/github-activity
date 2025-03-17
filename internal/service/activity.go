@@ -29,7 +29,12 @@ func FetchActivity(username string) []model.Activity {
 	return activities
 }
 
-func DisplayActivity(activities []model.Activity) {
+func DisplayActivity(activities []model.Activity, filterType string) {
+	if filterType != "" {
+		activities = utils.Filter(activities, func(activity model.Activity) bool {
+			return activity.Type == filterType
+		})
+	}
 	for _, activity := range activities {
 		switch activity.Type {
 		case "PushEvent":

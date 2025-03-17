@@ -14,8 +14,14 @@ func main() {
 		log.Fatalln("Please provide a username")
 	}
 
+	filterType := ""
+
+	if len(args) == 2 {
+		filterType = args[1]
+	}
+
 	username := args[0]
 
 	activities := service.FetchActivity(username)
-	service.DisplayActivity(activities)
+	service.DisplayActivity(activities, filterType)
 }
