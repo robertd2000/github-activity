@@ -30,6 +30,15 @@ func FetchActivity(username string) []model.Activity {
 
 func DisplayActivity(activities []model.Activity) {
 	for _, activity := range activities {
-		fmt.Println(activity.Type, activity.Repo.Name, activity.CreatedAt, activity.Payload.Action, activity.Payload.Ref, activity.Payload.RefType)
+		switch activity.Type {
+		case "PushEvent":
+			fmt.Println("Pushed to", activity.Repo.Name, "at", activity.CreatedAt, "with", len(activity.Payload.Commits), "commits")
+		case "CreateEvent":
+			fmt.Println("Created", activity.Repo.Name)
+		case "ForkEvent":
+			fmt.Println("Forked", activity.Repo.Name)
+		}
+		// fmt.Println(activity.Type, activity.Repo.Name, activity.CreatedAt, activity.Payload.Action, activity.Payload.Ref, activity.Payload.RefType, activity.Payload.Commits)
+
 	}
 }
