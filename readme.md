@@ -11,6 +11,19 @@ git clone https://github.com/robertd2000/github-activity.git
 cd github-activity
 ```
 
-<!-- Run the following command to build and run the project: -->
+Run the following command to run the project:
+
+```bash
+
+# to get all user activities
+go run .  <username>
+
+#example
+go run . robertd2000
+
+# to get only one type of activities:
+go run . robertd2000 DeleteEvent # return only DeleteEvent activities
+
+```
 
 [https://roadmap.sh/projects/github-user-activity](https://roadmap.sh/projects/github-user-activity)
