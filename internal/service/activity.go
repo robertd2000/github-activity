@@ -47,7 +47,9 @@ func DisplayActivity(activities []model.Activity) {
 		case "PullRequestEvent":
 			fmt.Println("Created pull request", activity.Repo.Name, "at", utils.FormatDate(activity.CreatedAt))
 		case "PullRequestReviewEvent":
-			fmt.Println("Reviewed pull request ", activity.Repo.Name, "at", utils.FormatDate(activity.CreatedAt))
+			fmt.Println("Reviewed pull request", activity.Repo.Name, "at", utils.FormatDate(activity.CreatedAt))
+		case "PullRequestReviewCommentEvent":
+			fmt.Println("Commented on pull request", activity.Repo.Name, "at", utils.FormatDate(activity.CreatedAt))
 
 		}
 		// fmt.Println(activity.Type, activity.Repo.Name, activity.CreatedAt, activity.Payload.Action, activity.Payload.Ref, activity.Payload.RefType, activity.Payload.Commits)
