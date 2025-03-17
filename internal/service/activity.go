@@ -55,6 +55,8 @@ func DisplayActivity(activities []model.Activity, filterType string) {
 			fmt.Println("- Reviewed pull request", activity.Repo.Name, "at", utils.FormatDate(activity.CreatedAt))
 		case "PullRequestReviewCommentEvent":
 			fmt.Println("- Commented on pull request", activity.Repo.Name, "at", utils.FormatDate(activity.CreatedAt))
+		case "DeleteEvent":
+			fmt.Println("- Delete from", activity.Repo.Name, "at", utils.FormatDate(activity.CreatedAt))
 		default:
 			fmt.Println("-", activity.Type, activity.Repo.Name, "at", utils.FormatDate(activity.CreatedAt))
 		}
