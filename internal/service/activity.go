@@ -17,7 +17,7 @@ func FetchActivity(username string) []model.Activity {
 	}
 
 	if resp.StatusCode != 200 {
-		log.Fatalln("Failed to fetch activity")
+		log.Fatalln("Failed to fetch activity for", username, "-", resp.StatusCode)
 	}
 
 	var activities []model.Activity
