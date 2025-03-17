@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	"os"
 
@@ -15,6 +16,9 @@ func main() {
 	}
 
 	username := args[0]
+
+	fmt.Println("Latest events for", username + ":")
+	fmt.Println()
 
 	activities := service.FetchActivity(username)
 	service.DisplayActivity(activities)
